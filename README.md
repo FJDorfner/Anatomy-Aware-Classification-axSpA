@@ -1,4 +1,4 @@
-# Anatomy-Aware-Classification-AxSpA
+# Anatomy-Aware-Classification-axSpA
 This is the accompanying repository for the Paper **Incorporating Anatomical Awareness for Enhanced Generalizability and Progression Prediction in Deep Learning-Based Radiographic Sacroiliitis Detection**.
 
 ## Background
