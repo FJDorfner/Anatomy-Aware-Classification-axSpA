@@ -21,7 +21,7 @@ We have integrated the complete Anatomy-Aware pipeline into a Gradio app that ca
 - Build the Docker image: `docker build -t axspa-classifier . `    
 - Start the Docker container: `docker run -p 8080:8080 axspa-classifier`
 - Open your favorite web browser and go to `localhost:8080` to use the app as demonstrated above.
-
+- Hint: Click **Additional Information** in the Interface to see a Grad-CAM as well.
 
 ## Paper Code
 All code used in the experiments described in the paper can be found under _paper_code/nbs_. 
