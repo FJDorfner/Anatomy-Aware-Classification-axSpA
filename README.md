@@ -2,7 +2,7 @@
 This is the accompanying repository for the Paper **Incorporating Anatomical Awareness for Enhanced Generalizability and Progression Prediction in Deep Learning-Based Radiographic Sacroiliitis Detection**.
 
 ## Background
-The assessment of radiographic sacroiliitis on pelvic radiographs plays an important role in the diagnosis and classifcation of axial Spondyloarthritis (axSpA). We were able to show that incorporating anatomical awareness into a CNN used for the detection of radiographic sacroiliitis, can improve the generalizabilty of the model and enable it to identify patients who are at a higher risk of progression to radiographic sacroiliitis. 
+The assessment of radiographic sacroiliitis on pelvic radiographs plays an important role in the diagnosis and classifcation of axial Spondyloarthritis (axSpA). We were able to show that incorporating anatomical awareness into a CNN used for the detection of radiographic sacroiliitis, can improve the generalizabilty of the model and enable it to identify patients who are at a higher risk of progression to radiographic sacroiliitis. Read more about it in our preprint: https://arxiv.org/abs/2405.07369v1
 
 ## Gradio App
 We have integrated the complete Anatomy-Aware pipeline into a Gradio app that can be easily run locally via Docker. Here's what running the app looks like:
@@ -28,4 +28,14 @@ All code used in the experiments described in the paper can be found under _pape
 The Jupyter notebooks are organized sequentially as they were used in the study.
 
 ## Paper
-TBA
+```
+@article{dorfner2024incorporating,
+      title={Incorporating Anatomical Awareness for Enhanced Generalizability and Progression Prediction in Deep Learning-Based Radiographic Sacroiliitis Detection}, 
+      author={Felix J. Dorfner and Janis L. Vahldiek and Leonhard Donle and Andrei Zhukov and Lina Xu and Hartmut Häntze and Marcus R. Makowski and Hugo J. W. L. Aerts and Fabian Proft and Valeria Rios Rodriguez and Judith Rademacher and Mikhail Protopopov and Hildrun Haibel and Torsten Diekhoff and Murat Torgutalp and Lisa C. Adams and Denis Poddubnyy and Keno K. Bressem},
+      year={2024},
+      eprint={2405.07369},
+      archivePrefix={arXiv},
+      primaryClass={cs.CV}
+}
+```
+
