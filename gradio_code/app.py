@@ -6,6 +6,9 @@ import Model_Seg
 import SimpleITK as sitk
 import torch
 from numpy import uint8
+
+
+device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 image_base64 = utils.image_to_base64("anatomy_aware_pipeline.png")
 article_html = f"<img src='data:image/png;base64,{image_base64}' alt='Anatomical pipeline illustration' style='width:100%;'>"
 
@@ -51,7 +54,6 @@ footer {
 }
 """
 
-
 def predict_image(input_image, input_file):
 
     if input_image is not None:
@@ -63,7 +65,7 @@ def predict_image(input_image, input_file):
     else:
         return None , None , "Please input an image before pressing run" , None , None
 
-    image_mask = Model_Seg.load_and_segment_image(image_path)
+    image_mask = Model_Seg.load_and_segment_image(image_path, device)
 
     overlay_image_np, original_image_np = utils.overlay_mask(image_path, image_mask)
 
@@ -74,10 +76,10 @@ def predict_image(input_image, input_file):
     cropped_boxed_array = sitk.GetArrayFromImage(cropped_boxed_im)
     cropped_boxed_array_disp = cropped_boxed_array.squeeze()
     cropped_boxed_tensor = torch.Tensor(cropped_boxed_array)
-    prediction, image_transformed = Model_Class.load_and_classify_image(cropped_boxed_tensor)
+    prediction, image_transformed = Model_Class.load_and_classify_image(cropped_boxed_tensor, device)
 
 
-    gradcam = Model_Class.make_GradCAM(image_transformed)
+    gradcam = Model_Class.make_GradCAM(image_transformed, device)
     
     nr_axSpA_prob = float(prediction[0].item())
     r_axSpA_prob = float(prediction[1].item())

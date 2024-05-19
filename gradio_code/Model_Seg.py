@@ -40,7 +40,7 @@ model = UNet(
 )
 
 checkpoint_path = 'segmentation_model.pt'
-checkpoint = torch.load(checkpoint_path, map_location='cpu')
+checkpoint = torch.load(checkpoint_path, map_location='cpu')  
 assert model.state_dict().keys() == checkpoint['network'].keys(), "Model and checkpoint keys do not match"
 
 model.load_state_dict(checkpoint['network'])
@@ -71,25 +71,24 @@ post_transforms = Compose([
 
 
 
-def load_and_segment_image(input_image_path):
+def load_and_segment_image(input_image_path, device):
         
-    
     image_tensor = pre_transforms(input_image_path)
-    image_tensor = image_tensor.unsqueeze(0)
+    image_tensor = image_tensor.unsqueeze(0).to(device)
 
     # Inference using SlidingWindowInferer
     inferer = SlidingWindowInferer(roi_size=(512, 512), sw_batch_size=16, overlap=0.75)
     with torch.no_grad():
-        outputs = inferer(image_tensor, model)
+        outputs = inferer(image_tensor, model.to(device))
 
 
-    outputs = outputs.squeeze(0)  
+    outputs = outputs.squeeze(0)
 
     processed_outputs = post_transforms(outputs)
 
     # rotate 
     rotate = Rotate90(spatial_axes=(0, 1), k=3)
-    processed_outputs = rotate(processed_outputs)
+    processed_outputs = rotate(processed_outputs).to('cpu')  
 
     output_array = processed_outputs.squeeze().detach().numpy().astype(np.uint8)
 

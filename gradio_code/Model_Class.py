@@ -59,30 +59,34 @@ val_transforms_416x628 = Compose(
     ]
 )
 
-
 checkpoint = torch.load("classification_model.ckpt", map_location=torch.device('cpu'))
 model = ResNet()
 model.load_state_dict(checkpoint["state_dict"])
 model.eval()
 
 
-def load_and_classify_image(image_path):
+def load_and_classify_image(image_path, device):
+
+    gpu_model = model.to(device)
     image = val_transforms_416x628(image_path)
-    image = image.unsqueeze(0)
+    image = image.unsqueeze(0).to(device)
 
     with torch.no_grad():
-        prediction = model(image)
+        prediction = gpu_model(image)
         prediction = torch.nn.functional.softmax(prediction, dim=1).squeeze(0)
-        return prediction, image
+        return prediction.to('cpu'), image.to('cpu')
     
 
-def make_GradCAM(image):
-
-    model.eval()
-    target_layers = [model.model.layer4[-1]]
+def make_GradCAM(image, device):
 
     arr = image.numpy().squeeze()
-    cam = GradCAM(model=model, target_layers=target_layers)
+    gpu_model = model.to(device)
+    image = image.to(device)
+    model.eval()
+    target_layers = [gpu_model.model.layer4[-1]]
+
+    
+    cam = GradCAM(model=gpu_model, target_layers=target_layers)
     targets = None
     grayscale_cam = cam(
         input_tensor=image,
