@@ -72,7 +72,6 @@ post_transforms = Compose([
 
 
 def load_and_segment_image(input_image_path, device):
-        
     image_tensor = pre_transforms(input_image_path)
     image_tensor = image_tensor.unsqueeze(0).to(device)
 
@@ -84,11 +83,7 @@ def load_and_segment_image(input_image_path, device):
 
     outputs = outputs.squeeze(0)
 
-    processed_outputs = post_transforms(outputs)
-
-    # rotate 
-    rotate = Rotate90(spatial_axes=(0, 1), k=3)
-    processed_outputs = rotate(processed_outputs).to('cpu')  
+    processed_outputs = post_transforms(outputs).to('cpu')  
 
     output_array = processed_outputs.squeeze().detach().numpy().astype(np.uint8)
 

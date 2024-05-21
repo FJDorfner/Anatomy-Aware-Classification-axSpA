@@ -5,8 +5,8 @@ import Model_Seg
 
 import SimpleITK as sitk
 import torch
-from numpy import uint8
-
+from numpy import uint8, rot90, fliplr
+from monai.transforms import Rotate90
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 image_base64 = utils.image_to_base64("anatomy_aware_pipeline.png")
@@ -68,14 +68,19 @@ def predict_image(input_image, input_file):
     image_mask = Model_Seg.load_and_segment_image(image_path, device)
 
     overlay_image_np, original_image_np = utils.overlay_mask(image_path, image_mask)
+    overlay_image_np = rot90(overlay_image_np, k=3)
+    overlay_image_np = fliplr(overlay_image_np)
 
     image_mask_im = sitk.GetImageFromArray(image_mask[None, :, :].astype(uint8))
     image_im = sitk.GetImageFromArray(original_image_np[None, :, :].astype(uint8))
     cropped_boxed_im, _ = utils.mask_and_crop(image_im, image_mask_im)
 
     cropped_boxed_array = sitk.GetArrayFromImage(cropped_boxed_im)
-    cropped_boxed_array_disp = cropped_boxed_array.squeeze()
     cropped_boxed_tensor = torch.Tensor(cropped_boxed_array)
+    rotate = Rotate90(spatial_axes=(0, 1), k=3)
+
+    cropped_boxed_tensor = rotate(cropped_boxed_tensor)
+    cropped_boxed_array_disp = cropped_boxed_tensor.numpy().squeeze().astype(uint8)
     prediction, image_transformed = Model_Class.load_and_classify_image(cropped_boxed_tensor, device)
 
 

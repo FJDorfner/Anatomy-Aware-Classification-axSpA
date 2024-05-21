@@ -1,4 +1,4 @@
-from monai.transforms import Transform
+from monai.transforms import Transform, Compose, LoadImage, EnsureChannelFirst
 import torch
 import skimage
 import torch
@@ -13,6 +13,7 @@ import base64
 import numpy as np
 from cv2 import dilate
 from scipy.ndimage import label
+from Model_Seg import RgbaToGrayscale
 
 def image_to_base64(image_path):
     with open(image_path, "rb") as image_file:
@@ -79,9 +80,14 @@ def custom_colormap():
     return cmap
 
 def read_image(image_path):
+    read_transforms = Compose([
+        LoadImage(image_only=True),
+        EnsureChannelFirst(),
+        RgbaToGrayscale(),  # Convert RGBA to grayscale
+    ])
     try:
-        original_image = Image.open(image_path).convert('L')
-        original_image_np = np.array(original_image)
+        original_image = read_transforms(image_path)
+        original_image_np = original_image.numpy().astype(np.uint8)
         return original_image_np.squeeze()
 
     except Exception as e:
