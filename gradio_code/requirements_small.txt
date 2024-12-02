@@ -1,0 +1,11 @@
+gradio==4.29.0
+numpy==1.22.2
+torch==1.13.0
+torchvision==0.14.0
+scikit-image==0.19.3
+pytorch-lightning==1.8.6
+monai-weekly==1.2.dev2320
+simpleitk==2.2.1
+nibabel==5.2.1
+itk==5.3.0
+grad-cam==1.4.6
