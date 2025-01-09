@@ -27,15 +27,17 @@ We have integrated the complete Anatomy-Aware pipeline into a Gradio app that ca
 All code used in the experiments described in the paper can be found under _paper_code/nbs_. 
 The Jupyter notebooks are organized sequentially as they were used in the study.
 
-## Paper
+## Citation
 ```
 @article{dorfner2024incorporating,
-      title={Incorporating Anatomical Awareness for Enhanced Generalizability and Progression Prediction in Deep Learning-Based Radiographic Sacroiliitis Detection}, 
-      author={Felix J. Dorfner and Janis L. Vahldiek and Leonhard Donle and Andrei Zhukov and Lina Xu and Hartmut Häntze and Marcus R. Makowski and Hugo J. W. L. Aerts and Fabian Proft and Valeria Rios Rodriguez and Judith Rademacher and Mikhail Protopopov and Hildrun Haibel and Torsten Diekhoff and Murat Torgutalp and Lisa C. Adams and Denis Poddubnyy and Keno K. Bressem},
-      year={2024},
-      eprint={2405.07369},
-      archivePrefix={arXiv},
-      primaryClass={cs.CV}
+	author = {Dorfner, Felix J. and Vahldiek, Janis L. and Donle, Leonhard and Zhukov, Andrei and Xu, Lina and H{\"a}ntze, Hartmut and Makowski, Marcus R. and Aerts, Hugo J. W. L. and Proft, Fabian and Rios Rodriguez, Valeria and Rademacher, Judith and Protopopov, Mikhail and Haibel, Hildrun and Hermann, Kay-Geert and Diekhoff, Torsten and Adams, Lisa C. and Torgutalp, Murat and Poddubnyy, Denis and Bressem, Keno K.},
+	title = {Anatomy-centred deep learning improves generalisability and progression prediction in radiographic sacroiliitis detection},
+	volume = {10},
+	number = {4},
+	year = {2024},
+	doi = {10.1136/rmdopen-2024-004628},
+	eprint = {https://rmdopen.bmj.com/content/10/4/e004628.full.pdf},
+	journal = {RMD Open}
 }
 ```
 
