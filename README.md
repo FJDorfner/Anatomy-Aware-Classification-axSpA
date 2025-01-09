@@ -1,8 +1,8 @@
 # Anatomy-Aware-Classification-axSpA
-This is the accompanying repository for the Paper **Incorporating Anatomical Awareness for Enhanced Generalizability and Progression Prediction in Deep Learning-Based Radiographic Sacroiliitis Detection**.
+This is the accompanying repository for the paper **Anatomy-centred deep learning improves generalisability and progression prediction in radiographic sacroiliitis detection**.
 
 ## Background
-The assessment of radiographic sacroiliitis on pelvic radiographs plays an important role in the diagnosis and classifcation of axial Spondyloarthritis (axSpA). We were able to show that incorporating anatomical awareness into a CNN used for the detection of radiographic sacroiliitis, can improve the generalizabilty of the model and enable it to identify patients who are at a higher risk of progression to radiographic sacroiliitis. Read more about it in our preprint: https://arxiv.org/abs/2405.07369v1
+The assessment of radiographic sacroiliitis on pelvic radiographs plays an important role in the diagnosis and classifcation of axial Spondyloarthritis (axSpA). We were able to show that incorporating anatomical awareness into a CNN used for the detection of radiographic sacroiliitis, can improve the generalizabilty of the model and enable it to identify patients who are at a higher risk of progression to radiographic sacroiliitis. Read more about it in our paper, published in RMD Open: https://rmdopen.bmj.com/content/10/4/e004628
 
 ## Gradio App
 We have integrated the complete Anatomy-Aware pipeline into a Gradio app that can be easily run locally via Docker. Here's what running the app looks like:
